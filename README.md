@@ -1,4 +1,4 @@
-# vue3-ts-cms
+# CMS-VUE3-TS-PINIA
 
 This template should help get you started developing with Vue 3 in Vite.
 
