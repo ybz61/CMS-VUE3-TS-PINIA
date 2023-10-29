@@ -39,8 +39,8 @@
 
 <script setup lang="ts">
 import { ref, watch } from 'vue'
-import PaneAccount from './pane-account.vue'
-import PanePhone from './pane-phone.vue'
+import paneAccount from './pane-account.vue'
+import panePhone from './pane-phone.vue'
 import { localCache } from '@/utils/cache'
 
 const activeName = ref('account')
@@ -53,7 +53,7 @@ watch(isRemPwd, (newVal) => {
 })
 
 // const accountRef = ref<any>()
-const accountRef = ref<InstanceType<typeof PaneAccount>>()
+const accountRef = ref<InstanceType<typeof paneAccount>>()
 
 // 立即登录
 function handleLoginBtnClick() {

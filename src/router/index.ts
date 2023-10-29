@@ -20,6 +20,24 @@ const router = createRouter({
       path: '/main',
       component: () => import('@/views/main/main.vue'),
       name: 'Main'
+      // children: [
+      //   {
+      //     path: '/main/analysis/overview',
+      //     component: () => import('@/views/main/analysis/overview/overview.vue')
+      //   },
+      //   {
+      //     path: '/main/analysis/dashboard',
+      //     component: () => import('@/views/main/analysis/dashboard/dashboard.vue')
+      //   },
+      //   {
+      //     path: '/main/system/role',
+      //     component: () => import('@/views/main/system/role/role.vue')
+      //   },
+      //   {
+      //     path: '/main/system/user',
+      //     component: () => import('@/views/main/system/user/user.vue')
+      //   }
+      // ]
     },
     {
       path: '/:pathMatch(.*)',

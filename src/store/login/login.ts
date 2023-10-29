@@ -1,17 +1,20 @@
 import { defineStore } from 'pinia'
 import { userAccountLogin, queryUserInfoById, queryUserMenuByRoleId } from '@/service/login/login'
 import router from '@/router'
-import type { IAccount, ILoginState, IUserInfo,IUserMenu } from '@/types'
+import type { IAccount, ILoginState, IUserInfo, IUserMenu } from '@/types'
 import { localCache } from '@/utils/cache'
 import { LOGIN_ID, LOGIN_NAME, LOGIN_TOKEN } from '@/global/constants'
+import { mapMenusToRoutes } from '@/utils/map-menus'
 
 const useLoginStore = defineStore('login', {
   state: (): ILoginState => ({
     id: localCache.getCache(LOGIN_ID) ?? '',
     name: localCache.getCache(LOGIN_NAME) ?? '',
     token: localCache.getCache(LOGIN_TOKEN) ?? '',
-    userInfo: <IUserInfo>{},
-    userMenu: <IUserMenu>[]
+    userInfo: localCache.getCache('userInfo') ?? <IUserInfo>{},
+    userMenu: localCache.getCache('userMenu') ?? <IUserMenu>[]
+    // userInfo: <IUserInfo>{},
+    // userMenu: <IUserMenu>[]
   }),
   actions: {
     async loginAccountAction(account: IAccount) {
@@ -21,25 +24,33 @@ const useLoginStore = defineStore('login', {
       this.id = loginResult.data.id
       this.name = loginResult.data.name
       this.token = loginResult.data.token
-
-      // 2.进行本地缓存
       localCache.setCache(LOGIN_ID, loginResult.data.id)
       localCache.setCache(LOGIN_NAME, loginResult.data.name)
       localCache.setCache(LOGIN_TOKEN, loginResult.data.token)
 
-      // 2.1.查询登录用户信息
+      // 2.查询登录用户信息
       const userInfoResult = await queryUserInfoById(loginResult.data.id)
       console.log('[ 查询用户信息 userInfoResult ] >', userInfoResult)
-      this.userInfo = userInfoResult.data
+      const userInfo = userInfoResult.data
+      this.userInfo = userInfo
 
-      console.log('[ this.userInfo.role ] >', this.userInfo.role)
+      // console.log('[ this.userInfo.role ] >', this.userInfo.role)
 
-      // 2.2.查询角色菜单树
+      // 3.查询角色菜单树
       const userMenuResult = await queryUserMenuByRoleId(this.userInfo.role.id)
       console.log('[ 查询角色菜单树 userMenuResult ] >', userMenuResult)
-      this.userMenu = userMenuResult.data
+      const userMenu = userMenuResult.data
+      this.userMenu = userMenu
 
-      // 跳转到main
+      // 4.进行本地缓存
+      localCache.setCache('userInfo', userInfo)
+      localCache.setCache('userMenu', userMenu)
+
+      // 6.动态添加路由
+      const routes = mapMenusToRoutes(userMenu)
+      routes.forEach((route) => router.addRoute('main', route))
+
+      // 5.跳转到main
       router.push('/main')
     }
   }
