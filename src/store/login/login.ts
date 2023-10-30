@@ -8,13 +8,11 @@ import { mapMenusToRoutes } from '@/utils/map-menus'
 
 const useLoginStore = defineStore('login', {
   state: (): ILoginState => ({
-    id: localCache.getCache(LOGIN_ID) ?? '',
-    name: localCache.getCache(LOGIN_NAME) ?? '',
-    token: localCache.getCache(LOGIN_TOKEN) ?? '',
-    userInfo: localCache.getCache('userInfo') ?? <IUserInfo>{},
-    userMenu: localCache.getCache('userMenu') ?? <IUserMenu>[]
-    // userInfo: <IUserInfo>{},
-    // userMenu: <IUserMenu>[]
+    id: -1,
+    name: '',
+    token: '',
+    userInfo: <IUserInfo>{},
+    userMenu: <IUserMenu>[]
   }),
   actions: {
     async loginAccountAction(account: IAccount) {
@@ -48,10 +46,31 @@ const useLoginStore = defineStore('login', {
 
       // 6.动态添加路由
       const routes = mapMenusToRoutes(userMenu)
-      routes.forEach((route) => router.addRoute('main', route))
+      routes.forEach((route) => router.addRoute('Main', route))
 
       // 5.跳转到main
       router.push('/main')
+    },
+
+    loadLocalCacheAction() {
+      // 1.用户进行刷新默认加载数据
+      const id = localCache.getCache(LOGIN_ID)
+      const name = localCache.getCache(LOGIN_NAME)
+      const token = localCache.getCache(LOGIN_TOKEN)
+      const userInfo = localCache.getCache('userInfo')
+      const userMenu = localCache.getCache('userMenu')
+
+      if (id && name && token && userInfo && userMenu) {
+        this.id = id
+        this.name = name
+        this.token = token
+        this.userInfo = userInfo
+        this.userMenu = userMenu
+
+        // 2.动态添加路由
+        const routes = mapMenusToRoutes(userMenu)
+        routes.forEach((route) => router.addRoute('Main', route))
+      }
     }
   }
 })

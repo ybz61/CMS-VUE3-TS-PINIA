@@ -1,6 +1,6 @@
 <template>
   <div class="main_header">
-    <div class="fold_icon" @click="handleFoldIconClick">
+    <div class="menu_icon" @click="handleFoldIconClick">
       <el-icon size="28px">
         <component :is="isFold ? 'Expand' : 'Fold'" />
       </el-icon>

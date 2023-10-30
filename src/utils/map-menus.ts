@@ -24,6 +24,7 @@ function loadLoaclRoutes() {
   return localRoutes
 }
 
+export let firstMenu: any = null
 export function mapMenusToRoutes(userMenu: IUserMenu) {
   // 1.加载本地路由
   const localRoutes = loadLoaclRoutes()
@@ -34,11 +35,31 @@ export function mapMenusToRoutes(userMenu: IUserMenu) {
     for (const submenu of menu.children) {
       const route = localRoutes.find((item) => item.path === submenu.url)
       if (route) {
-        // router.addRoute('main', route)
         routes.push(route)
+        // router.addRoute('Main', route)
+      }
+
+      // 记录第一个被匹配到的菜单
+      if (!firstMenu && route) {
+        firstMenu = submenu
       }
     }
   }
 
   return routes
+}
+
+/**
+ * 根据路径去匹配需要显示的菜单
+ * @param path 需要匹配的路径
+ * @param userMenu 所有的菜单
+ */
+export function mapPathToMenu(path: string, userMenu: IUserMenu) {
+  for (const menu of userMenu) {
+    for (const submenu of menu.children) {
+      if (submenu.url === path) {
+        return submenu
+      }
+    }
+  }
 }

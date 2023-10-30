@@ -4,12 +4,11 @@
       <img class="img" src="@/assets/img/logo.svg" alt="logo" />
       <h2 v-show="!isFold" class="title">后台管理系统</h2>
     </div>
-    <div>
-      <!-- 
-        :default-active="defaultActive"
-       -->
+
+    <div class="menu">
       <el-menu
         :collapse="isFold"
+        :default-active="defaultActive"
         text-color="#b7bdc3"
         active-text-color="#fff"
         background-color="#001529"
@@ -23,25 +22,14 @@
               </el-icon>
               <span>{{ item.name }}</span>
             </template>
-            <el-menu-item
-              v-for="subItem in item.children"
-              :key="subItem.id"
-              :index="String(subItem.id)"
-              @click="handleItemClick(subItem)"
-            >
-              {{ subItem.name }}
-            </el-menu-item>
+
+            <template v-for="subItem in item.children" :key="subItem.id">
+              <el-menu-item :index="subItem.id + ''" @click="handleItemClick(subItem)">
+                {{ subItem.name }}
+              </el-menu-item>
+            </template>
           </el-sub-menu>
         </template>
-
-        <!-- <el-sub-menu index="1">
-          <template #title>
-            <el-icon><Monitor /></el-icon>
-            <span>系统总览</span>
-          </template>
-          <el-menu-item>核心技术</el-menu-item>
-          <el-menu-item>商品统计</el-menu-item>
-        </el-sub-menu> -->
       </el-menu>
     </div>
   </div>
@@ -49,9 +37,10 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import { useRouter } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import useLoginStore from '@/store/login/login'
-// import type { IUserMenuRoot2 } from '@/types/login'
+// import type { IUserMenuRoot2 } from '@/types/login'\
+import { mapPathToMenu } from '@/utils/map-menus'
 
 // 0.定义props
 defineProps({
@@ -75,11 +64,11 @@ function handleItemClick(item: any) {
 }
 
 // 3.ElMenu的默认菜单
-// const route = useRoute()
-// const defaultActive = computed(() => {
-//   const pathMenu = mapPathToMenu(route.path, userMenus)
-//   return pathMenu.id + ''
-// })
+const route = useRoute()
+const defaultActive = computed(() => {
+  const pathMenu = mapPathToMenu(route.path, userMenu)
+  return pathMenu ? String(pathMenu.id) : ''
+})
 </script>
 
 <style scoped lang="less">
@@ -117,6 +106,7 @@ function handleItemClick(item: any) {
   }
   .el-menu-item:hover {
     color: #fff;
+    // background-color: #0a60bd;
   }
   .el-menu-item.is-active {
     background-color: #0a60bd;

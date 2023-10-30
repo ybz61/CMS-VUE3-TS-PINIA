@@ -1,6 +1,7 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import { LOGIN_TOKEN } from '@/global/constants'
 import { localCache } from '@/utils/cache'
+import { firstMenu } from '@/utils/map-menus'
 
 const router = createRouter({
   // hash模式：createWebHashHistory
@@ -20,24 +21,7 @@ const router = createRouter({
       path: '/main',
       component: () => import('@/views/main/main.vue'),
       name: 'Main'
-      // children: [
-      //   {
-      //     path: '/main/analysis/overview',
-      //     component: () => import('@/views/main/analysis/overview/overview.vue')
-      //   },
-      //   {
-      //     path: '/main/analysis/dashboard',
-      //     component: () => import('@/views/main/analysis/dashboard/dashboard.vue')
-      //   },
-      //   {
-      //     path: '/main/system/role',
-      //     component: () => import('@/views/main/system/role/role.vue')
-      //   },
-      //   {
-      //     path: '/main/system/user',
-      //     component: () => import('@/views/main/system/user/user.vue')
-      //   }
-      // ]
+      // children: localRoutes
     },
     {
       path: '/:pathMatch(.*)',
@@ -46,7 +30,30 @@ const router = createRouter({
   ]
 })
 
-// 导航守卫
+// // 1.获取所有的路由
+// const localRoutes = [
+//   {
+//     path: '/main/analysis/overview',
+//     component: () => import('@/views/main/analysis/overview/overview.vue')
+//   },
+//   {
+//     path: '/main/analysis/dashboard',
+//     component: () => import('@/views/main/analysis/dashboard/dashboard.vue')
+//   },
+//   {
+//     path: '/main/system/role',
+//     component: () => import('@/views/main/system/role/role.vue')
+//   },
+//   {
+//     path: '/main/system/user',
+//     component: () => import('@/views/main/system/user/user.vue')
+//   }
+// ]
+// // 2.动态的添加路由
+// router.addRoute('Main', localRoutes[0])
+// router.addRoute('Main', localRoutes[1])
+
+// 添加导航守卫
 // 参数: to(跳转到的位置), from(从哪里跳转过来), next(下一步)
 // 返回值: 返回值决定导航的路径(不返回或者返回undefined, 默认跳转)
 // 举个栗子: / => /main
@@ -57,6 +64,10 @@ router.beforeEach((to) => {
   if (to.path.startsWith('/main') && !token) {
     return '/login'
   }
+
+  // if (to.path === '/main') {
+  //   return firstMenu?.url
+  // }
 })
 
 export default router

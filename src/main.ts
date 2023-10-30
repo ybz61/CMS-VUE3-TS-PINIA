@@ -4,11 +4,13 @@ import './assets/css/index.less'
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
-import pinia from './store'
+
+// import pinia from './store'
+import store from './store'
 
 // 0.针对ElMessage和ElLoading等组件引入样式
 // 0.1.组件样式引入
-import 'element-plus/theme-chalk/el-message.css'
+// import 'element-plus/theme-chalk/el-message.css'
 /**
  * 0.2.使用 vite-plugin-style-import 和 consola 两个包
  *   * npm install vite-plugin-style-import consola -D
@@ -23,7 +25,9 @@ import 'element-plus/theme-chalk/el-message.css'
 // 3.1.图标的全局注册
 // import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 // 4.1
-import registerIcons from './global/register_icons'
+import icons from './global/register_icons'
+
+// import useLoginStore from './store/login/login'
 
 const app = createApp(App)
 
@@ -36,8 +40,12 @@ const app = createApp(App)
 //   app.component(key, component)
 // }
 // 4.2
-app.use(registerIcons)
+app.use(icons)
+
+app.use(store)
+// app.use(pinia)
+// const loginStore = useLoginStore()
+// loginStore.loadLocalCacheAction()
 
 app.use(router)
-app.use(pinia)
 app.mount('#app')

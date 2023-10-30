@@ -2,19 +2,17 @@
   <div class="main">
     <el-container class="main_content">
       <el-aside :width="isFold ? '60px' : '210px'">
-        <main-menu :is-fold="isFold"></main-menu>
+        <main-menu :is-fold="isFold" />
       </el-aside>
       <el-container>
-        <el-header>
-          <main-header @fold-change="handleFoldChange"></main-header>
+        <el-header height="50px">
+          <main-header @fold-change="handleFoldChange" />
         </el-header>
-        <!-- <el-main>Main</el-main> -->
-        <router-view></router-view>
+        <el-main>
+          <router-view />
+        </el-main>
       </el-container>
     </el-container>
-
-    <!-- <h2>main</h2> -->
-    <!-- <button @click="handleExitClick">退出登录</button> -->
   </div>
 </template>
 
