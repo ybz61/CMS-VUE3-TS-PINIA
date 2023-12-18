@@ -7,3 +7,5 @@
 //   //   const component: DefineComponent<{}, {}, any>
 //   export default component
 // }
+
+declare module '*.mjs'

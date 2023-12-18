@@ -6,10 +6,7 @@ import vue from '@vitejs/plugin-vue'
 import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
-import {
-  createStyleImportPlugin,
-  ElementPlusResolve
-} from 'vite-plugin-style-import'
+import { createStyleImportPlugin, ElementPlusResolve } from 'vite-plugin-style-import'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -39,6 +36,17 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
+    }
+  },
+  // 跨域
+  server: {
+    proxy: {
+      '/api': {
+        // target: 'https://hqk10.xyz:3000/api/v1',
+        target: 'http://codercba.com:5000',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, '')
+      }
     }
   }
 })

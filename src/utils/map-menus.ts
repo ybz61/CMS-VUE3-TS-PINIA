@@ -25,6 +25,12 @@ function loadLoaclRoutes() {
 }
 
 export let firstMenu: any = null
+
+/**
+ * 根据菜单匹配路由
+ * @param userMenu
+ * @returns
+ */
 export function mapMenusToRoutes(userMenu: IUserMenu) {
   // 1.加载本地路由
   const localRoutes = loadLoaclRoutes()
@@ -35,6 +41,15 @@ export function mapMenusToRoutes(userMenu: IUserMenu) {
     for (const submenu of menu.children) {
       const route = localRoutes.find((item) => item.path === submenu.url)
       if (route) {
+        // 2.1.给route的一级菜单增加重定向功能（但是只需要添加一次即可）
+        if (!routes.find((item) => item.path === menu.url)) {
+          routes.push({
+            path: menu.url,
+            redirect: route.path
+          })
+        }
+
+        // 2.2.将二级菜单添加到路由中
         routes.push(route)
         // router.addRoute('Main', route)
       }
@@ -50,9 +65,10 @@ export function mapMenusToRoutes(userMenu: IUserMenu) {
 }
 
 /**
- * 根据路径去匹配需要显示的菜单
- * @param path 需要匹配的路径
- * @param userMenu 所有的菜单
+ * 根据路径匹配菜单
+ * @param path
+ * @param userMenu
+ * @returns
  */
 export function mapPathToMenu(path: string, userMenu: IUserMenu) {
   for (const menu of userMenu) {
@@ -62,4 +78,37 @@ export function mapPathToMenu(path: string, userMenu: IUserMenu) {
       }
     }
   }
+}
+
+/**
+ * 根据路径匹配面包屑
+ * @param path
+ * @param userMenu
+ * @returns
+ */
+interface IBreadCrumb {
+  name: string
+  path: string
+}
+export function mapPathToBreadCrumbs(path: string, userMenu: IUserMenu) {
+  // 1.定义面包屑
+  const breadCrumbs: IBreadCrumb[] = []
+  // 2.遍历获取面包屑层级
+  for (const menu of userMenu) {
+    for (const submenu of menu.children) {
+      if (submenu.url === path) {
+        // 2.1.获取一级菜单
+        breadCrumbs.push({
+          name: menu.name,
+          path: menu.url
+        })
+        // 2.2.获取二级菜单
+        breadCrumbs.push({
+          name: submenu.name,
+          path: submenu.url
+        })
+      }
+    }
+  }
+  return breadCrumbs
 }

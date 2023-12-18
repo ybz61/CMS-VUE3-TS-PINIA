@@ -65,9 +65,10 @@ router.beforeEach((to) => {
     return '/login'
   }
 
-  // if (to.path === '/main') {
-  //   return firstMenu?.url
-  // }
+  // 进入到匹配的第一个菜单
+  if (to.path === '/main') {
+    return firstMenu?.url
+  }
 })
 
 export default router
