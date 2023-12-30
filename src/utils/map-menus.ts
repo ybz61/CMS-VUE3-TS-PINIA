@@ -112,3 +112,48 @@ export function mapPathToBreadCrumbs(path: string, userMenu: IUserMenu) {
   }
   return breadCrumbs
 }
+
+/**
+ * 菜单映射到id的列表
+ * @param menuList 菜单列表
+ * @returns 菜单id列表 数字数组
+ */
+export function mapMenuListToIds(menuList: any[]) {
+  const ids: number[] = []
+
+  function recurseGetId(menus: any[]) {
+    for (const item of menus) {
+      if (item.children) {
+        recurseGetId(item.children)
+      } else {
+        ids.push(item.id)
+      }
+    }
+  }
+  recurseGetId(menuList)
+
+  return ids
+}
+
+/**
+ * 从菜单列表中映射出权限列表 按钮权限
+ * @param menuList 菜单列表
+ * @returns 权限列表 字符串数组
+ */
+export function mapMenuListToPermissions(menuList: any[]) {
+  const permissions: string[] = []
+
+  function recurseGetPermission(menus: any[]) {
+    for (const item of menus) {
+      // [], null, undefined; []不会报错，结束递归；null, undefined会报错，结束递归
+      if (item.type === 3) {
+        permissions.push(item.permission)
+      } else {
+        recurseGetPermission(item.children ?? [])
+      }
+    }
+  }
+  recurseGetPermission(menuList)
+
+  return permissions
+}

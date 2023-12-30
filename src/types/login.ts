@@ -8,7 +8,9 @@ export interface ILoginState {
   name: string
   token: string
   userInfo: IUserInfo
-  userMenu: IUserMenu
+  userMenu: IUserMenu,
+
+  permissions: string[]
 }
 
 // 查询某个用户

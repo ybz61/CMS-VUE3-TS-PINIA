@@ -60,7 +60,7 @@ function handleLoginBtnClick() {
   if (activeName.value === 'account') {
     accountRef.value?.loginAction(isRemPwd.value)
   } else {
-    console.log('[ 手机登录 ] >')
+    // console.log('[ 手机登录 ] >')
   }
 }
 </script>

@@ -4,7 +4,8 @@ import router from '@/router'
 import type { IAccount, ILoginState, IUserInfo, IUserMenu } from '@/types'
 import { localCache } from '@/utils/cache'
 import { LOGIN_ID, LOGIN_NAME, LOGIN_TOKEN } from '@/global/constants'
-import { mapMenusToRoutes } from '@/utils/map-menus'
+import { mapMenusToRoutes, mapMenuListToPermissions } from '@/utils/map-menus'
+import useMainStore from '../main/main'
 
 const useLoginStore = defineStore('login', {
   state: (): ILoginState => ({
@@ -12,7 +13,9 @@ const useLoginStore = defineStore('login', {
     name: '',
     token: '',
     userInfo: <IUserInfo>{},
-    userMenu: <IUserMenu>[]
+    userMenu: <IUserMenu>[],
+
+    permissions: []
   }),
   actions: {
     async loginAccountAction(account: IAccount) {
@@ -44,7 +47,16 @@ const useLoginStore = defineStore('login', {
       localCache.setCache('userInfo', userInfo)
       localCache.setCache('userMenu', userMenu)
 
-      // 6.动态添加路由
+      // 重点 请求所有roles/departments/menus数据
+      const mainStore = useMainStore()
+      mainStore.fetchEntireDataAction()
+
+      // 重点 获取登录用户的所有按钮的权限
+      const permissions = mapMenuListToPermissions(userMenu)
+      console.log('[ loginAccountAction permissions ] >', permissions)
+      this.permissions = permissions
+
+      // 重点 动态添加路由
       const routes = mapMenusToRoutes(userMenu)
       routes.forEach((route) => router.addRoute('Main', route))
 
@@ -67,7 +79,16 @@ const useLoginStore = defineStore('login', {
         this.userInfo = userInfo
         this.userMenu = userMenu
 
-        // 2.动态添加路由
+        // 请求所有roles/departments/menus数据
+        const mainStore = useMainStore()
+        mainStore.fetchEntireDataAction()
+
+        // 获取登录用户的所有按钮的权限
+        const permissions = mapMenuListToPermissions(userMenu)
+        console.log('[ loadLocalCacheAction permissions ] >', permissions)
+        this.permissions = permissions
+
+        // 动态添加路由
         const routes = mapMenusToRoutes(userMenu)
         routes.forEach((route) => router.addRoute('Main', route))
       }

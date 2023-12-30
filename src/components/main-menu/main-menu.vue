@@ -55,7 +55,7 @@ defineProps({
 // 1.获取动态的菜单
 const loginStore = useLoginStore()
 const userMenu = loginStore.userMenu
-console.log('[ userMenu ] >', userMenu)
+// console.log('[ userMenu ] >', userMenu)
 
 // 2.处理菜单点击事件
 const router = useRouter()

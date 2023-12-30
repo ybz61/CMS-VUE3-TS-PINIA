@@ -1,0 +1,1 @@
+import hyRequest from '@/service'

@@ -19,7 +19,7 @@
       <el-dropdown>
         <span class="user_info">
           <el-avatar :size="30" src="https://avatars.githubusercontent.com/u/87956309" />
-          <span class="name">coderwhy</span>
+          <span class="name">{{ localCache.getCache(LOGIN_NAME) }}</span>
         </span>
         <template #dropdown>
           <el-dropdown-menu>

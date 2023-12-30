@@ -18,6 +18,7 @@
             <el-input v-model="searchForm.cellphone" placeholder="请输入查询的手机号码" />
           </el-form-item>
         </el-col>
+
         <el-col :span="8">
           <el-form-item label="状态" prop="enable">
             <el-select
@@ -56,23 +57,32 @@
 import { reactive, ref } from 'vue'
 import type { ElForm } from 'element-plus'
 
+// 定义form表单数据
 const searchForm = reactive({
   name: '',
   realname: '',
   cellphone: '',
-  enable: 1,
-  createAt: []
+  enable: '',
+  // enable: 1,
+  createAt: ''
 })
+
+// 定义自定义事件
+const emit = defineEmits(['queryClick', 'resetClick'])
 
 // 重置操作
 const formRef = ref<InstanceType<typeof ElForm>>()
 function handleResetClick() {
+  // 1.form中的数据全部重置
   formRef.value?.resetFields()
+  // searchForm.name = ''
+  // 2.重置后，需要手动触发查询操作：将事件传递给父组件，在父组件中对 userContent 组件进行操作
+  emit('resetClick')
 }
 
 // 查询操作
 function handleQueryClick() {
-  console.log('handleQueryClick')
+  emit('queryClick', searchForm)
 }
 </script>
 
