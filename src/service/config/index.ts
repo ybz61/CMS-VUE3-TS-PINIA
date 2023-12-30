@@ -9,7 +9,7 @@
 // console.log('[ import.meta.env.PROD ] >', import.meta.env.PROD) // 是否生产环境
 // console.log('[ import.meta.env.SSR ] >', import.meta.env.SSR) // 是否是服务器端渲染(server side render)
 
-let BASE_URL = ''
+// let BASE_URL = ''
 // if (import.meta.env.PROD) {
 //   BASE_URL = 'http://152.136.185.210:4000'
 // } else {
@@ -20,9 +20,10 @@ let BASE_URL = ''
 // console.log('[ import.meta.env ] >', import.meta.env)
 // console.log('[ import.meta.env.VITE_URL ] >', import.meta.env.VITE_URL)
 // console.log('[ import.meta.env.VITE_BASE_URL ] >', import.meta.env.VITE_BASE_URL)
-BASE_URL = import.meta.env.VITE_BASE_URL
+// BASE_URL = import.meta.env.VITE_BASE_URL
 
 // console.log('[ BASE_URL ] >', BASE_URL)
 
+// export { BASE_URL }
+export const BASE_URL = import.meta.env.VITE_BASE_URL
 export const TIME_OUT = 10000
-export { BASE_URL }

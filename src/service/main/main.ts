@@ -1,22 +1,30 @@
-import hyRequest from '@/service'
+import appRequest from '@/service'
 
 // 获取全部角色列表
 export function getEntireRoles() {
-  return hyRequest.post({
-    url: '/role/list'
+  return appRequest.post({
+    url: '/role/list',
+    data: {
+      offset: 0,
+      size: 1000
+    }
   })
 }
 
 // 获取全部部门列表
 export function getEntireDepartments() {
-  return hyRequest.post({
-    url: '/department/list'
+  return appRequest.post({
+    url: '/department/list',
+    data: {
+      offset: 0,
+      size: 1000
+    }
   })
 }
 
 // 获取全部菜单列表
 export function getEntireMenus() {
-  return hyRequest.post({
+  return appRequest.post({
     url: '/menu/list'
   })
 }

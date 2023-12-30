@@ -38,14 +38,28 @@ export default defineConfig({
       '@': fileURLToPath(new URL('./src', import.meta.url))
     }
   },
-  // 跨域
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          echarts: ['echarts']
+        }
+      }
+    },
+    // 关闭生成map文件 可以达到缩小打包体积
+    sourcemap: false,
+    // 关闭文件计算
+    reportCompressedSize: false
+  },
+  // 配置静态资源路径
+  base: './',
+  // 配置代理
   server: {
     proxy: {
-      '/api': {
-        // target: 'https://hqk10.xyz:3000/api/v1',
-        target: 'http://codercba.com:5000',
-        changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api/, '')
+      '/proxy': {
+        target: 'https://hqk10.xyz:3000/api/v1', // 代理地址
+        changeOrigin: true, // 是否跨域
+        rewrite: (path) => path.replace(/^\/proxy/, '') // 将 /proxy 重写为空
       }
     }
   }

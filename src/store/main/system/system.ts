@@ -31,7 +31,7 @@ const useSystemStore = defineStore('system', {
       // 1.删除数据操作
       const deleteRes = await deleteUserById(id)
       // console.log('[ deleteRes ] >', deleteRes)
-      if (deleteRes.code === 0) {
+      if (deleteRes.code === 200) {
         alert(deleteRes.data)
       }
       // 2.重新请求新的数据
@@ -41,7 +41,7 @@ const useSystemStore = defineStore('system', {
       // 1.创建新的用户
       const newRes = await newUserData(userInfo)
       // console.log('[ newRes ] >', newRes)
-      if (newRes.code === 0) {
+      if (newRes.code === 200) {
         alert(newRes.data)
       }
       // 2.重新请求新的数据
@@ -51,7 +51,7 @@ const useSystemStore = defineStore('system', {
       // 1.更新用户的数据
       const editRes = await editUserData(id, userInfo)
       // console.log('[ editRes ] >', editRes)
-      if (editRes.code === 0) {
+      if (editRes.code === 200) {
         alert(editRes.data)
       }
       // 2.重新请求新的数据
@@ -68,7 +68,7 @@ const useSystemStore = defineStore('system', {
     },
     async deletePageByIdAction(pageName: string, id: number) {
       const deleteRes = await deletePageById(pageName, id)
-      if (deleteRes.code === 0) {
+      if (deleteRes.code === 200) {
         alert(deleteRes.data)
       }
       this.getPageListAction(pageName, { offset: 0, size: 10 })
@@ -78,7 +78,7 @@ const useSystemStore = defineStore('system', {
     },
     async newPageDataAction(pageName: string, pageInfo: any) {
       const newRes = await newPageData(pageName, pageInfo)
-      if (newRes.code === 0) {
+      if (newRes.code === 200) {
         alert(newRes.data)
       }
       this.getPageListAction(pageName, { offset: 0, size: 10 })
@@ -89,7 +89,7 @@ const useSystemStore = defineStore('system', {
     },
     async editPageDataAction(pageName: string, id: number, pageInfo: any) {
       const editRes = await editPageData(pageName, id, pageInfo)
-      if (editRes.code === 0) {
+      if (editRes.code === 200) {
         alert(editRes.data)
       }
       this.getPageListAction(pageName, { offset: 0, size: 10 })

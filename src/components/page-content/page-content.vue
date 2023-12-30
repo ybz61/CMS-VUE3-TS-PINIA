@@ -45,7 +45,7 @@
           <template v-else-if="item.type === 'custom'">
             <el-table-column align="center" v-bind="item">
               <template #default="scope">
-                <slot :name="item.slotName" v-bind="scope" :prop="item.prop" hName="why"></slot>
+                <slot :name="item.slotName" v-bind="scope" :prop="item.prop"></slot>
               </template>
             </el-table-column>
           </template>

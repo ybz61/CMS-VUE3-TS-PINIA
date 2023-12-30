@@ -1,1 +1,1 @@
-import hyRequest from '@/service'
+import appRequest from '@/service'
