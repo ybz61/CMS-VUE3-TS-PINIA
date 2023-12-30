@@ -56,5 +56,5 @@ npx husky-init && npm install
 ### git commit规范 代码提交验证 commitlint
 
 ```
-npm commit
+npm run commit
 ```
