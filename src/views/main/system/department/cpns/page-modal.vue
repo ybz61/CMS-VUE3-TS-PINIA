@@ -37,7 +37,6 @@
 import { reactive, ref } from 'vue'
 import useMainStore from '@/store/main/main'
 import { storeToRefs } from 'pinia'
-import useSystemStore from '@/store/main/system/system'
 
 // 1.定义内部的属性
 const dialogVisible = ref(false)
@@ -51,7 +50,6 @@ const editData = ref()
 
 // 2.获取roles/departments数据
 const mainStore = useMainStore()
-const systemStore = useSystemStore()
 const { entireDepartments } = storeToRefs(mainStore)
 
 // 2.定义设置dialogVisible方法
@@ -78,10 +76,10 @@ function handleConfirmClick() {
   dialogVisible.value = false
   if (!isNewRef.value && editData.value) {
     // 编辑用户的数据
-    systemStore.editPageDataAction('department', editData.value.id, formData)
+    mainStore.editPageDataAction('department', editData.value.id, formData)
   } else {
     // 创建新的部门
-    systemStore.newPageDataAction('department', formData)
+    mainStore.newPageDataAction('department', formData)
   }
 }
 

@@ -52,7 +52,7 @@
 
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
-import useSystemStore from '@/store/main/system/system'
+import useMainStore from '@/store/main/main'
 import type { IModalProps } from './type'
 
 // interface IModalProps {
@@ -82,7 +82,7 @@ const isNewRef = ref(true)
 const editData = ref()
 
 // 2.获取roles/departments数据
-const systemStore = useSystemStore()
+const mainStore = useMainStore()
 
 // 2.定义设置dialogVisible方法
 function setModalVisible(isNew: boolean = true, itemData?: any) {
@@ -115,10 +115,10 @@ function handleConfirmClick() {
 
   if (!isNewRef.value && editData.value) {
     // 编辑数据
-    systemStore.editPageDataAction(props.modalConfig.pageName, editData.value.id, infoData)
+    mainStore.editPageDataAction(props.modalConfig.pageName, editData.value.id, infoData)
   } else {
     // 创建新数据
-    systemStore.newPageDataAction(props.modalConfig.pageName, infoData)
+    mainStore.newPageDataAction(props.modalConfig.pageName, infoData)
   }
 }
 

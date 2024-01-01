@@ -28,3 +28,28 @@ export function getEntireMenus() {
     url: '/menu/list'
   })
 }
+
+/** 针对页面的网络请求: 增删改查 */
+export function getPageListData(pageName: string, queryInfo: any) {
+  return appRequest.post({
+    url: `/${pageName}/list`,
+    data: queryInfo
+  })
+}
+export function deletePageById(pageName: string, id: number) {
+  return appRequest.delete({
+    url: `/${pageName}/${id}`
+  })
+}
+export function newPageData(pageName: string, pageInfo: any) {
+  return appRequest.post({
+    url: `/${pageName}`,
+    data: pageInfo
+  })
+}
+export function editPageData(pageName: string, id: number, pageInfo: any) {
+  return appRequest.patch({
+    url: `/${pageName}/${id}`,
+    data: pageInfo
+  })
+}

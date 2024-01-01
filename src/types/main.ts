@@ -12,8 +12,8 @@ export interface IUserList {
 
 export interface IUserListData {
   userList: IUserList[]
-  userTotalCount: number,
+  userTotalCount: number
 
-  pageList: any[]
-  pageTotalCount: number
+  // pageList: any[]
+  // pageTotalCount: number
 }

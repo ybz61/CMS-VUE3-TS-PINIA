@@ -62,7 +62,7 @@
 
 <script setup lang="ts">
 import { storeToRefs } from 'pinia'
-import useSystemStore from '@/store/main/system/system'
+import useMainStore from '@/store/main/main'
 import { formatUTC } from '@/utils/format'
 import { ref } from 'vue'
 
@@ -70,13 +70,13 @@ import { ref } from 'vue'
 const emit = defineEmits(['newClick', 'editClick'])
 
 // 1.发起action，请求usersList的数据
-const systemStore = useSystemStore()
+const mainStore = useMainStore()
 const currentPage = ref(1)
 const pageSize = ref(10)
 fetchPageListData()
 
 // 2.获取usersList数据,进行展示
-const { pageList, pageTotalCount } = storeToRefs(systemStore)
+const { pageList, pageTotalCount } = storeToRefs(mainStore)
 
 // 3.页码相关的逻辑
 function handleSizeChange() {
@@ -95,12 +95,12 @@ function fetchPageListData(formData: any = {}) {
 
   // 2.发起网络请求
   const queryInfo = { ...pageInfo, ...formData }
-  systemStore.getPageListAction('department', queryInfo)
+  mainStore.getPageListAction('department', queryInfo)
 }
 
 // 5.删除/新建/编辑的操作
 function handleDeleteBtnClick(id: number) {
-  systemStore.deletePageByIdAction('department', id)
+  mainStore.deletePageByIdAction('department', id)
 }
 function handleNewUserClick() {
   emit('newClick')

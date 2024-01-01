@@ -52,15 +52,15 @@ export default defineConfig({
     reportCompressedSize: false
   },
   // 配置静态资源路径
-  base: './',
+  base: './'
   // 配置代理
-  server: {
-    proxy: {
-      '/proxy': {
-        target: 'https://hqk10.xyz:3000/api/v1', // 代理地址
-        changeOrigin: true, // 是否跨域
-        rewrite: (path) => path.replace(/^\/proxy/, '') // 将 /proxy 重写为空
-      }
-    }
-  }
+  // server: {
+  //   proxy: {
+  //     '/proxy': {
+  //       target: 'https://hqk10.xyz:3000/api/v1', // 代理地址
+  //       changeOrigin: true, // 是否跨域
+  //       rewrite: (path) => path.replace(/^\/proxy/, '') // 将 /proxy 重写为空
+  //     }
+  //   }
+  // }
 })

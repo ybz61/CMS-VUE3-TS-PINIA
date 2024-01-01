@@ -71,7 +71,7 @@
 
 <script setup lang="ts">
 import { storeToRefs } from 'pinia'
-import useSystemStore from '@/store/main/system/system'
+import useMainStore from '@/store/main/main'
 import { formatUTC } from '@/utils/format'
 import { ref } from 'vue'
 import usePermissions from '@/hooks/usePermissions'
@@ -100,12 +100,12 @@ const isUpdate = usePermissions(`${props.contentConfig.pageName}:update`)
 const isQuery = usePermissions(`${props.contentConfig.pageName}:query`)
 
 // 1.发起action，请求usersList的数据
-const systemStore = useSystemStore()
+const mainStore = useMainStore()
 const currentPage = ref(1)
 const pageSize = ref(10)
 
-// 监听systemStore中的actions被执行：订阅action
-systemStore.$onAction(({ name, after }) => {
+// 监听 mainStore 中的actions被执行：订阅action
+mainStore.$onAction(({ name, after }) => {
   console.log('[ action被执行 ] >')
   // 通过name判断是否是对应的action
   after(() => {
@@ -122,7 +122,7 @@ systemStore.$onAction(({ name, after }) => {
 fetchPageListData()
 
 // 2.获取usersList数据,进行展示
-const { pageList, pageTotalCount } = storeToRefs(systemStore)
+const { pageList, pageTotalCount } = storeToRefs(mainStore)
 
 // 3.页码相关的逻辑
 function handleSizeChange() {
@@ -143,12 +143,12 @@ function fetchPageListData(formData: any = {}) {
 
   // 2.发起网络请求
   const queryInfo = { ...pageInfo, ...formData }
-  systemStore.getPageListAction(props.contentConfig.pageName, queryInfo)
+  mainStore.getPageListAction(props.contentConfig.pageName, queryInfo)
 }
 
 // 5.删除/新建/编辑的操作
 function handleDeleteBtnClick(id: number) {
-  systemStore.deletePageByIdAction(props.contentConfig.pageName, id)
+  mainStore.deletePageByIdAction(props.contentConfig.pageName, id)
 }
 function handleNewUserClick() {
   emit('newClick')
