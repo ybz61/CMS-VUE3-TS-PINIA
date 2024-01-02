@@ -58,3 +58,16 @@ npx husky-init && npm install
 ```
 npm run commit
 ```
+
+
+
+## 推荐使用[pnpm](https://pnpm.io/)
+
+```
+npm install -g pnpm
+pnpm run dev
+pnpm run build
+pnpm run lint
+pnpm run commit
+```
+
