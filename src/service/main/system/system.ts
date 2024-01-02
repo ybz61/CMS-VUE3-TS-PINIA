@@ -2,7 +2,7 @@ import appRequest from '@/service'
 
 /** 用户管理 */
 // 查询用户列表
-export function getUserListData(queryInfo: any) {
+export function postUserListData(queryInfo: any) {
   return appRequest.post({
     url: '/users/list',
     data: queryInfo

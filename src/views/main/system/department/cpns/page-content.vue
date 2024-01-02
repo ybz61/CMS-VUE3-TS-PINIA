@@ -95,7 +95,7 @@ function fetchPageListData(formData: any = {}) {
 
   // 2.发起网络请求
   const queryInfo = { ...pageInfo, ...formData }
-  mainStore.getPageListAction('department', queryInfo)
+  mainStore.postPageListAction('department', queryInfo)
 }
 
 // 5.删除/新建/编辑的操作

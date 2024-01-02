@@ -106,7 +106,7 @@ const pageSize = ref(10)
 
 // 监听 mainStore 中的actions被执行：订阅action
 mainStore.$onAction(({ name, after }) => {
-  console.log('[ action被执行 ] >')
+  // console.log('[ action被执行 ] >')
   // 通过name判断是否是对应的action
   after(() => {
     if (
@@ -143,7 +143,7 @@ function fetchPageListData(formData: any = {}) {
 
   // 2.发起网络请求
   const queryInfo = { ...pageInfo, ...formData }
-  mainStore.getPageListAction(props.contentConfig.pageName, queryInfo)
+  mainStore.postPageListAction(props.contentConfig.pageName, queryInfo)
 }
 
 // 5.删除/新建/编辑的操作

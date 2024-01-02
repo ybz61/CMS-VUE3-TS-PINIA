@@ -1,9 +1,9 @@
 import { defineStore } from 'pinia'
 import {
-  getEntireDepartments,
-  getEntireRoles,
-  getEntireMenus,
-  getPageListData,
+  postEntireDepartments,
+  postEntireRoles,
+  postEntireMenus,
+  postPageListData,
   deletePageById,
   newPageData,
   editPageData
@@ -29,9 +29,9 @@ const useMainStore = defineStore('main', {
   }),
   actions: {
     async fetchEntireDataAction() {
-      const rolesRes = await getEntireRoles()
-      const departmentsRes = await getEntireDepartments()
-      const menuRes = await getEntireMenus()
+      const rolesRes = await postEntireRoles()
+      const departmentsRes = await postEntireDepartments()
+      const menuRes = await postEntireMenus()
 
       // 保存数据
       this.entireRoles = rolesRes.data.list
@@ -40,8 +40,8 @@ const useMainStore = defineStore('main', {
     },
 
     /** 针对页面的数据: 增删改查 */
-    async getPageListAction(pageName: string, queryInfo: any) {
-      const pageListResult = await getPageListData(pageName, queryInfo)
+    async postPageListAction(pageName: string, queryInfo: any) {
+      const pageListResult = await postPageListData(pageName, queryInfo)
       const { totalCount, list } = pageListResult.data
 
       this.pageList = list
@@ -52,7 +52,7 @@ const useMainStore = defineStore('main', {
       if (deleteRes.code === 200) {
         alert(deleteRes.data)
       }
-      this.getPageListAction(pageName, { offset: 0, size: 10 })
+      this.postPageListAction(pageName, { offset: 0, size: 10 })
       // 获取完整的数据
       this.fetchEntireDataAction()
     },
@@ -61,7 +61,7 @@ const useMainStore = defineStore('main', {
       if (newRes.code === 200) {
         alert(newRes.data)
       }
-      this.getPageListAction(pageName, { offset: 0, size: 10 })
+      this.postPageListAction(pageName, { offset: 0, size: 10 })
       // 获取完整的数据
       this.fetchEntireDataAction()
     },
@@ -70,7 +70,7 @@ const useMainStore = defineStore('main', {
       if (editRes.code === 200) {
         alert(editRes.data)
       }
-      this.getPageListAction(pageName, { offset: 0, size: 10 })
+      this.postPageListAction(pageName, { offset: 0, size: 10 })
       // 获取完整的数据
       this.fetchEntireDataAction()
     }

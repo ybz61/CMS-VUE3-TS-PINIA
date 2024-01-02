@@ -99,7 +99,7 @@ const currentPage = ref(1)
 
 // 监听systemStore中的actions被执行：订阅action
 systemStore.$onAction(({ name, after }) => {
-  console.log('[ action被执行 ] >')
+  // console.log('[ action被执行 ] >')
   // 通过name判断是否是对应的action
   after(() => {
     if (
@@ -138,7 +138,7 @@ function fetchUserListData(formData: any = {}) {
 
   // 2 发起网络请求
   const queryInfo = { ...pageInfo, ...formData }
-  systemStore.getUserListAction(queryInfo)
+  systemStore.postUserListAction(queryInfo)
 }
 
 // 定义自定义事件

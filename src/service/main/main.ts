@@ -1,7 +1,7 @@
 import appRequest from '@/service'
 
 // 获取全部角色列表
-export function getEntireRoles() {
+export function postEntireRoles() {
   return appRequest.post({
     url: '/role/list',
     data: {
@@ -12,7 +12,7 @@ export function getEntireRoles() {
 }
 
 // 获取全部部门列表
-export function getEntireDepartments() {
+export function postEntireDepartments() {
   return appRequest.post({
     url: '/department/list',
     data: {
@@ -23,7 +23,7 @@ export function getEntireDepartments() {
 }
 
 // 获取全部菜单列表
-export function getEntireMenus() {
+export function postEntireMenus() {
   return appRequest.post({
     url: '/menu/list'
   })
@@ -47,7 +47,7 @@ export function editPageData(pageName: string, id: number, pageInfo: any) {
     data: pageInfo
   })
 }
-export function getPageListData(pageName: string, queryInfo: any) {
+export function postPageListData(pageName: string, queryInfo: any) {
   return appRequest.post({
     url: `/${pageName}/list`,
     data: queryInfo

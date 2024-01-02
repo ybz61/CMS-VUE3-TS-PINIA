@@ -1,13 +1,20 @@
 <template>
   <div class="list">
-    <h2>list</h2>
+    <template v-for="item in storyList" :key="item.id">
+      <page-comment :comment="item" />
+    </template>
   </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import pageComment from '@/components/page-comment/page-comment.vue'
 
-<style scoped lang="less">
-.list {
-  color: red;
-}
-</style>
+import useStoryStore from '@/store/main/story/story'
+import { storeToRefs } from 'pinia'
+
+const storyStore = useStoryStore()
+storyStore.postStoryListAction()
+const { storyList } = storeToRefs(storyStore)
+</script>
+
+<style scoped lang="less"></style>

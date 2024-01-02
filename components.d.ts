@@ -50,6 +50,7 @@ declare module 'vue' {
     MainHeader: typeof import('./src/components/main-header/main-header.vue')['default']
     MainMenu: typeof import('./src/components/main-menu/main-menu.vue')['default']
     MapEchart: typeof import('./src/components/page-echarts/src/map-echart.vue')['default']
+    PageComment: typeof import('./src/components/page-comment/page-comment.vue')['default']
     PageContent: typeof import('./src/components/page-content/page-content.vue')['default']
     PageModal: typeof import('./src/components/page-modal/page-modal.vue')['default']
     PageSearch: typeof import('./src/components/page-search/page-search.vue')['default']

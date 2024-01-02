@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import {
-  getUserListData,
+  postUserListData,
   deleteUserById,
   newUserData,
   editUserData
@@ -16,8 +16,8 @@ const useSystemStore = defineStore('system', {
     // pageTotalCount: 0
   }),
   actions: {
-    async getUserListAction(queryInfo: any) {
-      const userListDataRes = await getUserListData(queryInfo)
+    async postUserListAction(queryInfo: any) {
+      const userListDataRes = await postUserListData(queryInfo)
       const { list, totalCount } = userListDataRes.data
       this.userList = list
       this.userTotalCount = totalCount
@@ -30,7 +30,7 @@ const useSystemStore = defineStore('system', {
         alert(deleteRes.data)
       }
       // 2.重新请求新的数据
-      this.getUserListAction({ offset: 0, size: 10 })
+      this.postUserListAction({ offset: 0, size: 10 })
     },
     async newUserDataAction(userInfo: any) {
       // 1.创建新的用户
@@ -40,7 +40,7 @@ const useSystemStore = defineStore('system', {
         alert(newRes.data)
       }
       // 2.重新请求新的数据
-      this.getUserListAction({ offset: 0, size: 10 })
+      this.postUserListAction({ offset: 0, size: 10 })
     },
     async editUserDataAction(id: number, userInfo: any) {
       // 1.更新用户的数据
@@ -50,7 +50,7 @@ const useSystemStore = defineStore('system', {
         alert(editRes.data)
       }
       // 2.重新请求新的数据
-      this.getUserListAction({ offset: 0, size: 10 })
+      this.postUserListAction({ offset: 0, size: 10 })
     }
   }
 })
