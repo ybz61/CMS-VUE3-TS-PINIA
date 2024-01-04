@@ -1,5 +1,5 @@
 <template>
-  <div class="search" v-if="isQuery">
+  <div class="page_search" v-if="isQuery">
     <!-- 1.输入搜索关键字的表单 -->
     <el-form
       :model="searchForm"
@@ -90,7 +90,7 @@ function handleQueryClick() {
 </script>
 
 <style lang="less" scoped>
-.search {
+.page_search {
   background-color: #fff;
   padding: 20px;
 

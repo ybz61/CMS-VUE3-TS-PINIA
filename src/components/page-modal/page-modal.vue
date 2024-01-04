@@ -1,5 +1,5 @@
 <template>
-  <div class="modal">
+  <div class="page_modal">
     <el-dialog
       v-model="dialogVisible"
       :title="isNewRef ? modalConfig.header.newTitle : modalConfig.header.editTitle"

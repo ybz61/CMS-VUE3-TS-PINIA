@@ -25,7 +25,7 @@ const useStoryStore = defineStore('story', {
       if (newRes.code === 200) {
         alert(newRes.data)
       }
-      this.postStoryListAction()
+      // this.postStoryListAction()
     }
   }
 })
