@@ -21,7 +21,9 @@ function loadLoaclRoutes() {
     localRoutes.push(module.default)
   }
 
-  return localRoutes
+  // return localRoutes
+  // 不显示'overview'页面
+  return localRoutes.filter((item) => item.path !== '/main/analysis/overview')
 }
 
 export let firstMenu: any = null

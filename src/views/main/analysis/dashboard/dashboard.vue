@@ -1,5 +1,5 @@
 <template>
-  <div class="dashboard">
+  <div class="dashboard" v-loading="isLoading">
     <!-- 1.顶部数字的数据展示 -->
     <el-row :gutter="10">
       <template v-for="item in amountList" :key="item.amount">
@@ -58,8 +58,14 @@ const analysisStore = useAnalysisStore()
 analysisStore.fetchAnalysisDataAction()
 
 // 2.从store获取数据
-const { amountList, goodsCategoryCount, goodsCategorySale, goodsCategoryFavor, goodsAddressSale } =
-  storeToRefs(analysisStore)
+const {
+  amountList,
+  goodsCategoryCount,
+  goodsCategorySale,
+  goodsCategoryFavor,
+  goodsAddressSale,
+  isLoading
+} = storeToRefs(analysisStore)
 
 // 3.获取数据
 // 每个分类商品的个数

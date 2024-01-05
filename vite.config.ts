@@ -52,7 +52,7 @@ export default defineConfig({
     reportCompressedSize: false
   },
   // 配置静态资源路径
-  base: './'
+  base: './',
   // 配置代理
   // server: {
   //   proxy: {

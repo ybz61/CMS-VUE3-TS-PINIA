@@ -25,5 +25,6 @@
 // console.log('[ BASE_URL ] >', BASE_URL)
 
 // export { BASE_URL }
+
 export const BASE_URL = import.meta.env.VITE_BASE_URL
-export const TIME_OUT = 10000
+export const TIME_OUT = 60000

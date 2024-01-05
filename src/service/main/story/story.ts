@@ -13,3 +13,9 @@ export function postStoryList(queryInfo: any) {
     data: queryInfo
   })
 }
+
+export function getStoryDetail(storyId: number) {
+  return appRequest.get({
+    url: `/story/${storyId}`
+  })
+}

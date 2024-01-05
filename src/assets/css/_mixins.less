@@ -1,0 +1,27 @@
+/* 单行文本省略号 */
+.ellipsis(@line: 1) when (@line =1) {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+/**
+ * 多行省略
+ * @line 行数 默认值 2
+ */
+.ellipsis(@line) when (@line > 1) {
+  display: -webkit-box;
+  /* autoprefixer: ignore next */
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: @line;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+}
+
+.user-select(@type: auto) {
+  -webkit-user-select: @type;
+  -moz-user-select: @type;
+  -ms-user-select: @type;
+  user-select: @type;
+}

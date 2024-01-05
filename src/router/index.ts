@@ -24,6 +24,11 @@ const router = createRouter({
       // children: localRoutes
     },
     {
+      path: '/detail',
+      component: () => import('@/views/main/story/list/detail.vue'),
+      name: 'Detail'
+    },
+    {
       path: '/:pathMatch(.*)',
       component: () => import('@/views/not-found/not-found.vue')
     }

@@ -1,5 +1,5 @@
 <template>
-  <div class="list">
+  <div class="list" v-loading="isLoading">
     <template v-for="item in storyList" :key="item.id">
       <page-comment :comment="item" />
     </template>
@@ -14,7 +14,7 @@ import { storeToRefs } from 'pinia'
 
 const storyStore = useStoryStore()
 storyStore.postStoryListAction()
-const { storyList } = storeToRefs(storyStore)
+const { storyList,isLoading } = storeToRefs(storyStore)
 </script>
 
 <style scoped lang="less"></style>

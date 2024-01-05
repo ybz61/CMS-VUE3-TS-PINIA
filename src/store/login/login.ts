@@ -1,3 +1,4 @@
+import { ElMessage } from 'element-plus';
 import { defineStore } from 'pinia'
 import { userAccountLogin, queryUserInfoById, queryUserMenuByRoleId } from '@/service/login/login'
 import router from '@/router'
@@ -20,17 +21,20 @@ const useLoginStore = defineStore('login', {
   actions: {
     async loginAccountAction(account: IAccount) {
       // 1.账号登录, 获取token等信息
-      const loginResult = await userAccountLogin(account)
-      console.log('[ 账号登录 loginResult ] >', loginResult)
-      this.id = loginResult.data.id
-      this.name = loginResult.data.name
-      this.token = loginResult.data.token
-      localCache.setCache(LOGIN_ID, loginResult.data.id)
-      localCache.setCache(LOGIN_NAME, loginResult.data.name)
-      localCache.setCache(LOGIN_TOKEN, loginResult.data.token)
+      const loginRes = await userAccountLogin(account)
+      console.log('[ 账号登录 loginRes ] >', loginRes)
+      this.id = loginRes.data.id
+      this.name = loginRes.data.name
+      this.token = loginRes.data.token
+      localCache.setCache(LOGIN_ID, loginRes.data.id)
+      localCache.setCache(LOGIN_NAME, loginRes.data.name)
+      localCache.setCache(LOGIN_TOKEN, loginRes.data.token)
+      if (loginRes.code == 200 || loginRes.code == 0) {
+        ElMessage.success('登录成功')
+      }
 
       // 2.查询登录用户信息
-      const userInfoResult = await queryUserInfoById(loginResult.data.id)
+      const userInfoResult = await queryUserInfoById(loginRes.data.id)
       console.log('[ 查询用户信息 userInfoResult ] >', userInfoResult)
       const userInfo = userInfoResult.data
       this.userInfo = userInfo

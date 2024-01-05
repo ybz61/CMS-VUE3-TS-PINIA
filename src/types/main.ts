@@ -16,4 +16,6 @@ export interface IUserListData {
 
   // pageList: any[]
   // pageTotalCount: number
+
+  isLoading: boolean
 }

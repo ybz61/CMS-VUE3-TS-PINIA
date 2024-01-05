@@ -13,6 +13,7 @@ interface IAnalysisState {
   goodsCategorySale: any[]
   goodsCategoryFavor: any[]
   goodsAddressSale: any[]
+  isLoading: boolean
 }
 
 const useAnalysisStore = defineStore('analysis', {
@@ -21,27 +22,30 @@ const useAnalysisStore = defineStore('analysis', {
     goodsCategoryCount: [], // 每个分类商品的个数
     goodsCategorySale: [], // 每个分类商品的销量
     goodsCategoryFavor: [], // 每个分类商品的收藏
-    goodsAddressSale: [] // 不同城市的销量数据
+    goodsAddressSale: [], // 不同城市的销量数据
+    isLoading: false
   }),
   actions: {
-    fetchAnalysisDataAction() {
+    async fetchAnalysisDataAction() {
       getAmountListData().then((res) => {
+        this.isLoading = true
         this.amountList = res.data
       })
-      getGoodsCategoryCount().then((res) => {
-        this.goodsCategoryCount = res.data.slice(0, 7)
+      await getGoodsCategoryCount().then((res) => {
+        this.goodsCategoryCount = res.data?.slice(0, 7)
         // this.goodsCategoryCount = res.data
       })
-      getGoodsCategorySale().then((res) => {
-        this.goodsCategorySale = res.data.slice(0, 7)
+      await getGoodsCategorySale().then((res) => {
+        this.goodsCategorySale = res.data?.slice(0, 7)
         // this.goodsCategorySale = res.data
       })
-      getGoodsCategoryFavor().then((res) => {
-        this.goodsCategoryFavor = res.data.slice(0, 7)
+      await getGoodsCategoryFavor().then((res) => {
+        this.goodsCategoryFavor = res.data?.slice(0, 7)
         // this.goodsCategoryFavor = res.data
       })
-      getGoodsAddressSale().then((res) => {
+      await getGoodsAddressSale().then((res) => {
         this.goodsAddressSale = res.data
+        this.isLoading = false
       })
     }
   }

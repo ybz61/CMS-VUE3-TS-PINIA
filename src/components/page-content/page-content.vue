@@ -7,7 +7,7 @@
       </el-button>
     </div>
     <div class="table">
-      <el-table :data="pageList" border style="width: 100%" v-bind="contentConfig.childrenTree">
+      <el-table :data="pageList" border style="width: 100%" v-bind="contentConfig.childrenTree" v-loading="isLoading">
         <template v-for="item in contentConfig.propsList" :key="item.prop">
           <template v-if="item.type === 'timer'">
             <el-table-column align="center" v-bind="item">
@@ -122,7 +122,7 @@ mainStore.$onAction(({ name, after }) => {
 fetchPageListData()
 
 // 2.获取usersList数据,进行展示
-const { pageList, pageTotalCount } = storeToRefs(mainStore)
+const { pageList, pageTotalCount,isLoading } = storeToRefs(mainStore)
 
 // 3.页码相关的逻辑
 function handleSizeChange() {

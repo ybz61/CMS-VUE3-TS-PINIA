@@ -5,7 +5,7 @@
       <el-button v-if="isCreate" type="primary" @click="handleNewUserClick">新建用户</el-button>
     </div>
     <div class="table">
-      <el-table :data="userList" border style="width: 100%">
+      <el-table :data="userList" border style="width: 100%" v-loading="isLoading">
         <el-table-column align="center" type="selection" width="50px" />
         <el-table-column align="center" type="index" label="序号" width="60px" />
 
@@ -115,7 +115,7 @@ systemStore.$onAction(({ name, after }) => {
 fetchUserListData()
 
 // 2 获取usersList数据,进行展示
-const { userList, userTotalCount } = storeToRefs(systemStore)
+const { userList, userTotalCount, isLoading } = storeToRefs(systemStore)
 
 // 3 页码相关
 function handleSizeChange() {
