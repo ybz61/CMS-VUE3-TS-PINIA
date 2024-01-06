@@ -11,7 +11,39 @@
       ref="contentRef"
       @new-click="handleNewClick"
       @edit-click="handleEditClick"
-    />
+    >
+      <template #newPrice="scope">
+        <span>
+          {{ '￥' + scope.row.newPrice }}
+        </span>
+      </template>
+      <template #oldPrice="scope">
+        <span>
+          {{ '￥' + scope.row.oldPrice }}
+        </span>
+      </template>
+      <template #status="scope">
+        <span>
+          {{ scope.row.status === 1 ? '已上架' : '已下架' }}
+        </span>
+      </template>
+      <template #imgUrl="scope">
+        <el-image
+          v-if="scope.row.imgUrl"
+          style="width: 75px; height: 75px; border-radius: 5px"
+          :src="scope.row.imgUrl"
+          :preview-teleported="true"
+          :zoom-rate="1.2"
+          :preview-src-list="[scope.row.imgUrl]"
+          fit="cover"
+        />
+        <!-- <img
+          :src="scope.row.imgUrl"
+          alt=""
+          style="width: 100px; height: 100px; border-radius: 5px"
+        /> -->
+      </template>
+    </page-content>
 
     <page-modal :modal-config="modalConfig" ref="modalRef" />
   </div>
@@ -36,4 +68,13 @@ const { contentRef, handleQueryClick, handleResetClick } = usePageContent()
 const { modalRef, handleNewClick, handleEditClick } = usePageModal()
 </script>
 
-<style scoped lang="less"></style>
+<style scoped lang="less">
+.el-table__cell {
+  .cell.el-tootip {
+    min-width: 50px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+}
+</style>

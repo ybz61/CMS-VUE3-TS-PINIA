@@ -11,7 +11,13 @@
       ref="contentRef"
       @new-click="handleNewClick"
       @edit-click="handleEditClick"
-    />
+    >
+      <template #enable="scope">
+        <span>
+          {{ scope.row.enable === 1 ? '已启用' : '已禁用' }}
+        </span>
+      </template>
+    </page-content>
 
     <page-modal :modal-config="modalConfig" ref="modalRef" />
   </div>

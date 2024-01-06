@@ -1,6 +1,12 @@
 <template>
   <div class="menu">
-    <page-content :content-config="contentConfig" />
+    <page-content :content-config="contentConfig">
+      <template #icon="scope">
+        <el-icon v-if="scope.row.icon">
+          <component :is="scope.row.icon.split('-icon-')[1]" />
+        </el-icon>
+      </template>
+    </page-content>
   </div>
 </template>
 

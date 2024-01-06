@@ -15,11 +15,11 @@ const searchConfig = {
       placeholder: '请选择状态',
       options: [
         {
-          label: '启用',
+          label: '已启用',
           value: '1'
         },
         {
-          label: '禁用',
+          label: '已禁用',
           value: '0'
         }
       ]

@@ -10,16 +10,16 @@ const searchConfig = {
     },
     {
       type: 'select',
-      prop: 'enable',
+      prop: 'status',
       label: '状态',
       placeholder: '请选择状态',
       options: [
         {
-          label: '启用',
+          label: '已上架',
           value: '1'
         },
         {
-          label: '禁用',
+          label: '已下架',
           value: '0'
         }
       ]

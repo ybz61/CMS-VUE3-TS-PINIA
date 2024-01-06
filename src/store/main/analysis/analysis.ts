@@ -27,8 +27,8 @@ const useAnalysisStore = defineStore('analysis', {
   }),
   actions: {
     async fetchAnalysisDataAction() {
-      getAmountListData().then((res) => {
-        this.isLoading = true
+      await getAmountListData().then((res) => {
+        // this.isLoading = true
         this.amountList = res.data
       })
       await getGoodsCategoryCount().then((res) => {
@@ -45,7 +45,7 @@ const useAnalysisStore = defineStore('analysis', {
       })
       await getGoodsAddressSale().then((res) => {
         this.goodsAddressSale = res.data
-        this.isLoading = false
+        // this.isLoading = false
       })
     }
   }

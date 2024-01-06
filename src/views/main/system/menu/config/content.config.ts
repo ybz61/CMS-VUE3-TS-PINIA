@@ -6,9 +6,9 @@ const contentConfig = {
   },
   propsList: [
     { label: '菜单名称', prop: 'name', width: '180px' },
-    { label: '级别', prop: 'type', width: '120px' },
-    { label: '菜单url', prop: 'url', width: '150px' },
-    { label: '菜单icon', prop: 'icon', width: '200px' },
+    { label: '菜单级别', prop: 'type', width: '120px' },
+    { label: '路径', prop: 'url', width: '150px' },
+    { label: '图标', prop: 'icon', width: '200px', type: 'custom', slotName: 'icon' },
     { label: '排序', prop: 'sort', width: '120px' },
     { label: '权限', prop: 'permission', width: '150px' },
 
