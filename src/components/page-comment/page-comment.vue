@@ -52,7 +52,7 @@ defineProps<Prop>()
     .left {
       display: flex;
       align-items: center;
-      width: 80%;
+      width: 85%;
       .avatar {
         width: 35px;
         height: 35px;
@@ -76,9 +76,10 @@ defineProps<Prop>()
       }
     }
     .time {
-      width: 20%;
+      width: 15%;
       font-size: 16px;
       color: #999999;
+      text-align: right;
     }
   }
   .content {

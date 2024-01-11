@@ -14,7 +14,11 @@ import { storeToRefs } from 'pinia'
 
 const storyStore = useStoryStore()
 storyStore.postStoryListAction()
-const { storyList,isLoading } = storeToRefs(storyStore)
+const { storyList, isLoading } = storeToRefs(storyStore)
 </script>
 
-<style scoped lang="less"></style>
+<style scoped lang="less">
+.list {
+  min-height: 100%;
+}
+</style>

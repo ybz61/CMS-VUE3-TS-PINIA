@@ -1,9 +1,11 @@
 <template>
   <div class="login_panel">
     <h1 class="title">后台管理系统</h1>
-    <div class="tabs">
+    <div class="box_account">
+      <pane-account ref="accountRef" />
+    </div>
+    <!-- <div class="tabs">
       <el-tabs type="border-card" stretch v-model="activeName">
-        <!-- 1、帐号登录 -->
         <el-tab-pane label="帐号登录" name="account">
           <template #label>
             <div class="label">
@@ -13,7 +15,6 @@
           </template>
           <pane-account ref="accountRef" />
         </el-tab-pane>
-        <!-- 2、手机登录 -->
         <el-tab-pane label="手机登录" name="phone">
           <template #label>
             <div class="label">
@@ -24,14 +25,20 @@
           <pane-phone />
         </el-tab-pane>
       </el-tabs>
-    </div>
+    </div> -->
     <div class="controls">
       <template v-if="activeName === 'account'">
         <el-checkbox v-model="isRemPwd" label="记住密码" size="large" />
         <el-link type="primary">忘记密码</el-link>
       </template>
     </div>
-    <el-button class="login_btn" type="primary" size="large" @click="handleLoginBtnClick">
+    <el-button
+      class="login_btn"
+      type="primary"
+      size="large"
+      @click="handleLoginBtnClick"
+      :loading="isLogining"
+    >
       立即登录
     </el-button>
   </div>
@@ -39,9 +46,14 @@
 
 <script setup lang="ts">
 import { ref, watch } from 'vue'
+import { storeToRefs } from 'pinia'
+import useLoginStore from '@/store/login/login'
 import paneAccount from './pane-account.vue'
-import panePhone from './pane-phone.vue'
+// import panePhone from './pane-phone.vue'
 import { localCache } from '@/utils/cache'
+
+const loginStore = useLoginStore()
+const { isLogining } = storeToRefs(loginStore)
 
 const activeName = ref('account')
 
@@ -73,6 +85,13 @@ function handleLoginBtnClick() {
   .title {
     text-align: center;
     margin-bottom: 15px;
+  }
+
+  .box_account {
+    box-sizing: border-box;
+    border: 1px solid #ebeef5;
+    padding: 20px 10px 10px 5px;
+    // margin-bottom: 15px;
   }
 
   .label {

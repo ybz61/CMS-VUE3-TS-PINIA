@@ -1,4 +1,4 @@
-import { ElMessage } from 'element-plus';
+import { ElMessage } from 'element-plus'
 import { defineStore } from 'pinia'
 import { userAccountLogin, queryUserInfoById, queryUserMenuByRoleId } from '@/service/login/login'
 import router from '@/router'
@@ -16,10 +16,12 @@ const useLoginStore = defineStore('login', {
     userInfo: <IUserInfo>{},
     userMenu: <IUserMenu>[],
 
-    permissions: []
+    permissions: [],
+    isLogining: false
   }),
   actions: {
     async loginAccountAction(account: IAccount) {
+      this.isLogining = true
       // 1.账号登录, 获取token等信息
       const loginRes = await userAccountLogin(account)
       console.log('[ 账号登录 loginRes ] >', loginRes)
@@ -31,6 +33,10 @@ const useLoginStore = defineStore('login', {
       localCache.setCache(LOGIN_TOKEN, loginRes.data.token)
       if (loginRes.code == 200 || loginRes.code == 0) {
         ElMessage.success('登录成功')
+        this.isLogining = false
+      } else {
+        ElMessage.error('登录失败')
+        this.isLogining = false
       }
 
       // 2.查询登录用户信息

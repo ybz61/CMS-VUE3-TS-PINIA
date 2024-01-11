@@ -28,24 +28,21 @@ const useAnalysisStore = defineStore('analysis', {
   actions: {
     async fetchAnalysisDataAction() {
       await getAmountListData().then((res) => {
-        // this.isLoading = true
+        this.isLoading = true
         this.amountList = res.data
       })
       await getGoodsCategoryCount().then((res) => {
-        this.goodsCategoryCount = res.data?.slice(0, 7)
-        // this.goodsCategoryCount = res.data
+        this.goodsCategoryCount = res.data
       })
       await getGoodsCategorySale().then((res) => {
-        this.goodsCategorySale = res.data?.slice(0, 7)
-        // this.goodsCategorySale = res.data
+        this.goodsCategorySale = res.data
       })
       await getGoodsCategoryFavor().then((res) => {
-        this.goodsCategoryFavor = res.data?.slice(0, 7)
-        // this.goodsCategoryFavor = res.data
+        this.goodsCategoryFavor = res.data
       })
       await getGoodsAddressSale().then((res) => {
         this.goodsAddressSale = res.data
-        // this.isLoading = false
+        this.isLoading = false
       })
     }
   }

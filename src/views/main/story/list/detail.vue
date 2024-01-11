@@ -27,6 +27,7 @@ if (storyId.value !== null) {
 .detail {
   // color: red;
   width: 100%;
+  min-height: 100%;
   box-sizing: border-box;
   padding: 2rem;
   background: #ffffff;

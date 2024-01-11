@@ -1,4 +1,5 @@
 <template>
+  <!-- <div class="dashboard" v-loading="isLoading"> -->
   <div class="dashboard">
     <!-- 1.顶部数字的数据展示 -->
     <el-row :gutter="10">
@@ -58,14 +59,20 @@ const analysisStore = useAnalysisStore()
 analysisStore.fetchAnalysisDataAction()
 
 // 2.从store获取数据
-const { amountList, goodsCategoryCount, goodsCategorySale, goodsCategoryFavor, goodsAddressSale } =
-  storeToRefs(analysisStore)
+const {
+  amountList,
+  goodsCategoryCount,
+  goodsCategorySale,
+  goodsCategoryFavor,
+  goodsAddressSale
+  // isLoading
+} = storeToRefs(analysisStore)
 
 // 3.获取数据
 // 每个分类商品的个数
 const showGoodsCategoryCount = computed(() => {
   return (
-    goodsCategoryCount.value.map((item) => ({
+    goodsCategoryCount.value?.map((item) => ({
       name: item.name,
       value: item.goodsCount
     })) || []
@@ -73,20 +80,20 @@ const showGoodsCategoryCount = computed(() => {
 })
 // 每个分类商品的销量
 const showGoodsCategorySale = computed(() => {
-  const labels = goodsCategorySale.value.map((item) => item.name) || []
-  const values = goodsCategorySale.value.map((item) => item.goodsCount) || []
+  const labels = goodsCategorySale.value?.map((item) => item.name) || []
+  const values = goodsCategorySale.value?.map((item) => item.goodsCount) || []
   return { labels, values }
 })
 // 每个分类商品的收藏
 const showGoodsCategoryFavor = computed(() => {
-  const labels = goodsCategoryFavor.value.map((item) => item.name) || []
-  const values = goodsCategoryFavor.value.map((item) => item.goodsFavor) || []
+  const labels = goodsCategoryFavor.value?.map((item) => item.name) || []
+  const values = goodsCategoryFavor.value?.map((item) => item.goodsFavor) || []
   return { labels, values }
 })
 // 不同城市商品的销量
 const showGoodsAddressSale = computed(() => {
   return (
-    goodsAddressSale.value.map((item) => ({
+    goodsAddressSale.value?.map((item) => ({
       name: item.address,
       value: item.count
     })) || []
