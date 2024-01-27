@@ -40,7 +40,8 @@ export function mapMenusToRoutes(userMenu: IUserMenu) {
   // 2.根据菜单去匹配正确的路由
   const routes: RouteRecordRaw[] = []
   for (const menu of userMenu) {
-    for (const submenu of menu.children) {
+    // console.log('[ menu ] >', menu)
+    for (const submenu of menu.children ?? []) {
       const route = localRoutes.find((item) => item.path === submenu.url)
       if (route) {
         // 2.1.给route的一级菜单增加重定向功能（但是只需要添加一次即可）
@@ -74,7 +75,7 @@ export function mapMenusToRoutes(userMenu: IUserMenu) {
  */
 export function mapPathToMenu(path: string, userMenu: IUserMenu) {
   for (const menu of userMenu) {
-    for (const submenu of menu.children) {
+    for (const submenu of menu.children ?? []) {
       if (submenu.url === path) {
         return submenu
       }
@@ -97,7 +98,7 @@ export function mapPathToBreadCrumbs(path: string, userMenu: IUserMenu) {
   const breadCrumbs: IBreadCrumb[] = []
   // 2.遍历获取面包屑层级
   for (const menu of userMenu) {
-    for (const submenu of menu.children) {
+    for (const submenu of menu.children ?? []) {
       if (submenu.url === path) {
         // 2.1.获取一级菜单
         breadCrumbs.push({
